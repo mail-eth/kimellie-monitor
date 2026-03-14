@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KimEllie Monitor - AI Usage Dashboard</title>
+    <title>KimEllie Monitor - AI Usage & Cost Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -44,6 +44,10 @@
         .progress-bar {
             transition: width 0.5s ease;
         }
+        
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body class="gradient-bg min-h-screen text-white">
@@ -56,7 +60,7 @@
                     <h1 class="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                         KimEllie Monitor
                     </h1>
-                    <p class="text-purple-300 mt-1">Real-time AI Usage & Performance Dashboard</p>
+                    <p class="text-purple-300 mt-1">AI Usage, Cost & Performance Dashboard</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -68,13 +72,47 @@
         </div>
     </header>
 
-    <!-- Main Stats -->
+    <!-- Main Stats - COST & USAGE -->
     <main class="container mx-auto px-6 py-8">
-        <!-- Current Session -->
+        <!-- Cost Overview -->
+        <div class="glass rounded-2xl p-8 mb-8 glow">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <span>💰</span>
+                <span class="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">Cost Overview</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 rounded-xl p-6 border border-yellow-500/30">
+                    <div class="text-purple-300 text-sm mb-2">Total Cost Today</div>
+                    <div class="text-4xl font-bold text-yellow-400 counter">$0.42</div>
+                    <div class="text-sm text-purple-300">~ Rp 6.930</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-600/20 to-emerald-600/20 rounded-xl p-6 border border-green-500/30">
+                    <div class="text-purple-300 text-sm mb-2">Total Tokens Today</div>
+                    <div class="text-4xl font-bold text-green-400 counter">28,456</div>
+                    <div class="text-sm text-purple-300">Input: 4,392 | Output: 24,064</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl p-6 border border-purple-500/30">
+                    <div class="text-purple-300 text-sm mb-2">Avg Cost per 1K Tokens</div>
+                    <div class="text-4xl font-bold text-purple-400 counter">$0.015</div>
+                    <div class="text-sm text-purple-300">MiniMax M2.5</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-xl p-6 border border-cyan-500/30">
+                    <div class="text-purple-300 text-sm mb-2">Sessions Today</div>
+                    <div class="text-4xl font-bold text-cyan-400 counter">3</div>
+                    <div class="text-sm text-purple-300">Telegram: 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Session Usage -->
         <div class="glass rounded-2xl p-8 mb-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span>🧠</span>
-                <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Current Session</span>
+                <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Current Session Usage</span>
             </h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -85,13 +123,13 @@
                 </div>
                 
                 <div class="bg-white/5 rounded-xl p-6">
-                    <div class="text-purple-300 text-sm mb-2">Tokens</div>
-                    <div class="text-3xl font-bold">28 <span class="text-purple-300">/ 146</span></div>
-                    <div class="text-sm text-purple-300">in / out</div>
+                    <div class="text-purple-300 text-sm mb-2">Tokens This Session</div>
+                    <div class="text-3xl font-bold counter">174</div>
+                    <div class="text-sm text-purple-300">28 in / 146 out</div>
                 </div>
                 
                 <div class="bg-white/5 rounded-xl p-6">
-                    <div class="text-purple-300 text-sm mb-2">Context</div>
+                    <div class="text-purple-300 text-sm mb-2">Context Usage</div>
                     <div class="text-3xl font-bold">79%</div>
                     <div class="text-sm text-purple-300">159k / 200k</div>
                     <div class="w-full bg-white/10 rounded-full h-2 mt-2">
@@ -100,28 +138,66 @@
                 </div>
                 
                 <div class="bg-white/5 rounded-xl p-6">
-                    <div class="text-purple-300 text-sm mb-2">Cache Hit</div>
-                    <div class="text-3xl font-bold text-green-400">4%</div>
-                    <div class="text-sm text-purple-300">6.5k cached</div>
+                    <div class="text-purple-300 text-sm mb-2">Est. Session Cost</div>
+                    <div class="text-3xl font-bold text-yellow-400">$0.002</div>
+                    <div class="text-sm text-purple-300">~ Rp 33</div>
                 </div>
             </div>
         </div>
 
-        <!-- Runtime Info -->
+        <!-- Usage History -->
         <div class="grid md:grid-cols-2 gap-8 mb-8">
             <div class="glass rounded-2xl p-8">
                 <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span>📊</span>
+                    <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Usage History</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">📝</span>
+                            <span>Input Tokens</span>
+                        </div>
+                        <span class="font-bold text-cyan-400 counter">4,392</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">📤</span>
+                            <span>Output Tokens</span>
+                        </div>
+                        <span class="font-bold text-purple-400 counter">24,064</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">💾</span>
+                            <span>Cache Hit</span>
+                        </div>
+                        <span class="font-bold text-green-400">4%</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🧹</span>
+                            <span>Compactions</span>
+                        </div>
+                        <span class="font-bold">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
                     <span>⚙️</span>
-                    <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Runtime Info</span>
+                    <span class="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Runtime Info</span>
                 </h2>
                 
                 <div class="space-y-4">
                     <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
                         <span class="text-purple-300">Channel</span>
-                        <span class="font-bold">Telegram Direct</span>
+                        <span class="font-bold">Telegram</span>
                     </div>
                     <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
-                        <span class="text-purple-300">Session</span>
+                        <span class="text-purple-300">Session Type</span>
                         <span class="font-bold">agent:main</span>
                     </div>
                     <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
@@ -134,62 +210,41 @@
                     </div>
                 </div>
             </div>
-
-            <div class="glass rounded-2xl p-8">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>📊</span>
-                    <span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">Performance</span>
-                </h2>
-                
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
-                        <span class="text-purple-300">New Tokens</span>
-                        <span class="font-bold">152k</span>
-                    </div>
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
-                        <span class="text-purple-300">Queue Depth</span>
-                        <span class="font-bold text-green-400">0</span>
-                    </div>
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
-                        <span class="text-purple-300">Compactions</span>
-                        <span class="font-bold">0</span>
-                    </div>
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
-                        <span class="text-purple-300">Elevated</span>
-                        <span class="font-bold text-red-400">No</span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- System Status -->
-        <div class="glass rounded-2xl p-8 glow">
+        <div class="glass rounded-2xl p-8 mb-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
                 <span>🖥️</span>
                 <span class="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">System Status</span>
             </h2>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="text-center p-6 bg-green-500/10 rounded-xl border border-green-500/30">
-                    <div class="text-4xl mb-3">✅</div>
-                    <div class="text-xl font-bold text-green-400">Gateway</div>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/30">
+                    <div class="text-3xl mb-2">✅</div>
+                    <div class="font-bold text-green-400">Gateway</div>
                     <div class="text-purple-300 text-sm">Active</div>
                 </div>
-                <div class="text-center p-6 bg-green-500/10 rounded-xl border border-green-500/30">
-                    <div class="text-4xl mb-3">✅</div>
-                    <div class="text-xl font-bold text-green-400">Telegram</div>
+                <div class="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/30">
+                    <div class="text-3xl mb-2">✅</div>
+                    <div class="font-bold text-green-400">Telegram</div>
                     <div class="text-purple-300 text-sm">Connected</div>
                 </div>
-                <div class="text-center p-6 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
-                    <div class="text-4xl mb-3">⚠️</div>
-                    <div class="text-xl font-bold text-yellow-400">Cron Jobs</div>
+                <div class="text-center p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
+                    <div class="text-3xl mb-2">⚠️</div>
+                    <div class="font-bold text-yellow-400">Cron</div>
                     <div class="text-purple-300 text-sm">Limited</div>
+                </div>
+                <div class="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/30">
+                    <div class="text-3xl mb-2">✅</div>
+                    <div class="font-bold text-green-400">Repliz</div>
+                    <div class="text-purple-300 text-sm">Connected</div>
                 </div>
             </div>
         </div>
 
         <!-- Last Updated -->
-        <div class="text-center mt-8 text-purple-400">
+        <div class="text-center text-purple-400">
             <p>Last updated: <span id="lastUpdate">Loading...</span></p>
             <p class="text-sm mt-2">Auto-refresh every 30 seconds</p>
         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KimEllie Monitor - AI Task Dashboard</title>
+    <title>KimEllie Monitor - AI Usage Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -41,9 +41,8 @@
             50% { transform: translateY(-10px); }
         }
         
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        .progress-bar {
+            transition: width 0.5s ease;
         }
     </style>
 </head>
@@ -57,13 +56,13 @@
                     <h1 class="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                         KimEllie Monitor
                     </h1>
-                    <p class="text-purple-300 mt-1">Real-time AI Task & Performance Dashboard</p>
+                    <p class="text-purple-300 mt-1">Real-time AI Usage & Performance Dashboard</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
                 <span class="px-4 py-2 bg-green-500/20 rounded-full text-green-400 border border-green-500/30 flex items-center gap-2">
                     <span class="w-2 h-2 bg-green-400 rounded-full pulse"></span>
-                    Online
+                    Live
                 </span>
             </div>
         </div>
@@ -71,190 +70,128 @@
 
     <!-- Main Stats -->
     <main class="container mx-auto px-6 py-8">
-        <!-- Stats Grid -->
-        <div class="grid md:grid-cols-4 gap-6 mb-12">
-            <div class="glass rounded-2xl p-6 stat-card transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-4xl">💬</span>
-                    <span class="text-green-400 text-sm">↑ 12%</span>
-                </div>
-                <div class="text-4xl font-bold">247</div>
-                <div class="text-purple-300 text-sm">Total Comments</div>
-            </div>
+        <!-- Current Session -->
+        <div class="glass rounded-2xl p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                <span>🧠</span>
+                <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Current Session</span>
+            </h2>
             
-            <div class="glass rounded-2xl p-6 stat-card transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-4xl">📝</span>
-                    <span class="text-green-400 text-sm">↑ 8%</span>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/5 rounded-xl p-6">
+                    <div class="text-purple-300 text-sm mb-2">Model</div>
+                    <div class="text-xl font-bold text-cyan-400">MiniMax-M2.5</div>
+                    <div class="text-sm text-purple-300">minimax-portal</div>
                 </div>
-                <div class="text-4xl font-bold">12</div>
-                <div class="text-purple-300 text-sm">Posts Today</div>
-            </div>
-            
-            <div class="glass rounded-2xl p-6 stat-card transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-4xl">🛒</span>
-                    <span class="text-green-400 text-sm">↑ 25%</span>
+                
+                <div class="bg-white/5 rounded-xl p-6">
+                    <div class="text-purple-300 text-sm mb-2">Tokens</div>
+                    <div class="text-3xl font-bold">28 <span class="text-purple-300">/ 146</span></div>
+                    <div class="text-sm text-purple-300">in / out</div>
                 </div>
-                <div class="text-4xl font-bold">36</div>
-                <div class="text-purple-300 text-sm">Sales Today</div>
-            </div>
-            
-            <div class="glass rounded-2xl p-6 stat-card transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-4xl">⚡</span>
-                    <span class="text-green-400 text-sm">↑ 5%</span>
+                
+                <div class="bg-white/5 rounded-xl p-6">
+                    <div class="text-purple-300 text-sm mb-2">Context</div>
+                    <div class="text-3xl font-bold">79%</div>
+                    <div class="text-sm text-purple-300">159k / 200k</div>
+                    <div class="w-full bg-white/10 rounded-full h-2 mt-2">
+                        <div class="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full progress-bar" style="width: 79%"></div>
+                    </div>
                 </div>
-                <div class="text-4xl font-bold">98%</div>
-                <div class="text-purple-300 text-sm">Uptime</div>
+                
+                <div class="bg-white/5 rounded-xl p-6">
+                    <div class="text-purple-300 text-sm mb-2">Cache Hit</div>
+                    <div class="text-3xl font-bold text-green-400">4%</div>
+                    <div class="text-sm text-purple-300">6.5k cached</div>
+                </div>
             </div>
         </div>
 
-        <!-- Two Column Layout -->
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Skills Section -->
-            <div class="glass rounded-2xl p-8 glow">
-                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>🛠️</span>
-                    <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Active Skills</span>
-                </h2>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">📱</span>
-                            <span>repliz</span>
-                        </div>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Active</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">📊</span>
-                            <span>excel-xlsx</span>
-                        </div>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Active</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">💼</span>
-                            <span>sales</span>
-                        </div>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Active</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🤖</span>
-                            <span>agent-autonomy-kit</span>
-                        </div>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Active</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Activity -->
+        <!-- Runtime Info -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
             <div class="glass rounded-2xl p-8">
                 <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span>📋</span>
-                    <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Recent Activity</span>
+                    <span>⚙️</span>
+                    <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Runtime Info</span>
                 </h2>
+                
                 <div class="space-y-4">
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl">
-                        <div class="text-2xl">✅</div>
-                        <div>
-                            <p class="font-medium">Auto-reply 15 comments</p>
-                            <p class="text-purple-300 text-sm">2 minutes ago</p>
-                        </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Channel</span>
+                        <span class="font-bold">Telegram Direct</span>
                     </div>
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl">
-                        <div class="text-2xl">📝</div>
-                        <div>
-                            <p class="font-medium">Posted engagement content</p>
-                            <p class="text-purple-300 text-sm">15 minutes ago</p>
-                        </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Session</span>
+                        <span class="font-bold">agent:main</span>
                     </div>
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl">
-                        <div class="text-2xl">🔄</div>
-                        <div>
-                            <p class="font-medium">Skills updated</p>
-                            <p class="text-purple-300 text-sm">1 hour ago</p>
-                        </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Runtime</span>
+                        <span class="font-bold">Direct</span>
                     </div>
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl">
-                        <div class="text-2xl">🛒</div>
-                        <div>
-                            <p class="font-medium">New sale: 10 Cara Menghasilkan Uang</p>
-                            <p class="text-purple-300 text-sm">3 hours ago</p>
-                        </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Thinking</span>
+                        <span class="font-bold text-red-400">OFF</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span>📊</span>
+                    <span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">Performance</span>
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">New Tokens</span>
+                        <span class="font-bold">152k</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Queue Depth</span>
+                        <span class="font-bold text-green-400">0</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Compactions</span>
+                        <span class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl">
+                        <span class="text-purple-300">Elevated</span>
+                        <span class="font-bold text-red-400">No</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Best Sellers -->
-        <div class="mt-8 glass rounded-2xl p-8">
+        <!-- System Status -->
+        <div class="glass rounded-2xl p-8 glow">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                <span>🏆</span>
-                <span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">Best Sellers Today</span>
+                <span>🖥️</span>
+                <span class="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">System Status</span>
             </h2>
+            
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl p-6 border border-purple-500/30">
-                    <div class="text-3xl mb-3">💰</div>
-                    <div class="text-xl font-bold mb-2">10 Cara Menghasilkan Uang dari Facebook</div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-bold text-green-400">29</span>
-                        <span class="text-purple-300">pcs sold</span>
-                    </div>
+                <div class="text-center p-6 bg-green-500/10 rounded-xl border border-green-500/30">
+                    <div class="text-4xl mb-3">✅</div>
+                    <div class="text-xl font-bold text-green-400">Gateway</div>
+                    <div class="text-purple-300 text-sm">Active</div>
                 </div>
-                <div class="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-xl p-6 border border-cyan-500/30">
-                    <div class="text-3xl mb-3">✍️</div>
-                    <div class="text-xl font-bold mb-2">30 Ide Konten & Caption</div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-bold text-green-400">4</span>
-                        <span class="text-purple-300">pcs sold</span>
-                    </div>
+                <div class="text-center p-6 bg-green-500/10 rounded-xl border border-green-500/30">
+                    <div class="text-4xl mb-3">✅</div>
+                    <div class="text-xl font-bold text-green-400">Telegram</div>
+                    <div class="text-purple-300 text-sm">Connected</div>
                 </div>
-                <div class="bg-gradient-to-br from-orange-600/20 to-red-600/20 rounded-xl p-6 border border-orange-500/30">
-                    <div class="text-3xl mb-3">🚀</div>
-                    <div class="text-xl font-bold mb-2">Creator Viral Bundle</div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl font-bold text-green-400">3</span>
-                        <span class="text-purple-300">pcs sold</span>
-                    </div>
+                <div class="text-center p-6 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
+                    <div class="text-4xl mb-3">⚠️</div>
+                    <div class="text-xl font-bold text-yellow-400">Cron Jobs</div>
+                    <div class="text-purple-300 text-sm">Limited</div>
                 </div>
             </div>
         </div>
 
-        <!-- Schedule -->
-        <div class="mt-8 glass rounded-2xl p-8">
-            <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                <span>📅</span>
-                <span class="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Today's Schedule</span>
-            </h2>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="text-center p-6 bg-white/5 rounded-xl">
-                    <div class="text-3xl mb-2">🌅</div>
-                    <div class="text-xl font-bold">08:00</div>
-                    <div class="text-purple-300">Engagement Post</div>
-                    <span class="inline-block mt-2 px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Done</span>
-                </div>
-                <div class="text-center p-6 bg-white/5 rounded-xl">
-                    <div class="text-3xl mb-2">☀️</div>
-                    <div class="text-xl font-bold">13:00</div>
-                    <div class="text-purple-300">Authority Post</div>
-                    <span class="inline-block mt-2 px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Upcoming</span>
-                </div>
-                <div class="text-center p-6 bg-white/5 rounded-xl">
-                    <div class="text-3xl mb-2">🌇</div>
-                    <div class="text-xl font-bold">18:00</div>
-                    <div class="text-purple-300">Check Comments</div>
-                    <span class="inline-block mt-2 px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Pending</span>
-                </div>
-                <div class="text-center p-6 bg-white/5 rounded-xl">
-                    <div class="text-3xl mb-2">🌙</div>
-                    <div class="text-xl font-bold">20:00</div>
-                    <div class="text-purple-300">Conversion Post</div>
-                    <span class="inline-block mt-2 px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Pending</span>
-                </div>
-            </div>
+        <!-- Last Updated -->
+        <div class="text-center mt-8 text-purple-400">
+            <p>Last updated: <span id="lastUpdate">Loading...</span></p>
+            <p class="text-sm mt-2">Auto-refresh every 30 seconds</p>
         </div>
     </main>
 
@@ -263,5 +200,24 @@
         <p>Built with ❤️ by Ilham | Powered by OpenClaw AI</p>
         <p class="text-sm mt-2">© 2026 KimEllie Monitor. All rights reserved.</p>
     </footer>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                timeZone: 'Asia/Jakarta', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            document.getElementById('lastUpdate').textContent = now.toLocaleDateString('id-ID', options);
+        }
+        
+        updateTime();
+        setInterval(updateTime, 30000);
+    </script>
 </body>
 </html>
